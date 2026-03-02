@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-cinzel: 'Cinzel', serif;
+  --font-raleway: 'Raleway', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #010208;
+  overflow: hidden;
+  font-family: var(--font-raleway);
+  color: rgba(200, 220, 255, 0.9);
+}
+
+/* ── Constellation glow outline animation ── */
+@keyframes pulseOutline {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
+  }
+}
+
+/* ── Modal entrance animation ── */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── 3D Constellation Opening: Staggered link reveal ── */
+@keyframes linkSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Content panel fade-in after zoom ── */
+@keyframes contentReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* ── Title shimmer ── */
+@keyframes titleGlow {
+  0%, 100% { text-shadow: 0 0 12px rgba(100, 160, 255, 0.6); }
+  50% { text-shadow: 0 0 24px rgba(130, 180, 255, 0.9), 0 0 48px rgba(80, 140, 255, 0.3); }
+}
+
+/* ── Icon Bubble tooltip ── */
+.icon-bubble {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-bubble::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(5, 10, 40, 0.9);
+  color: rgba(180, 210, 255, 0.95);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  border: 1px solid rgba(100, 160, 255, 0.3);
+  font-family: var(--font-raleway);
+}
+
+.icon-bubble:hover::after {
+  opacity: 1;
+}
+
+/* ── Constellation label ── */
+.constellation-label {
+  font-family: var(--font-cinzel);
+  font-size: clamp(11px, 1.6vw, 15px);
+  color: rgba(200, 220, 255, 0.90);
+  text-shadow: 0 0 12px rgba(100, 160, 255, 0.7);
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* ── Constellation glow outline ── */
+.constellation-glow {
+  position: absolute;
+  inset: -12px -18px;
+  border-radius: 50px;
+  border: 1px solid rgba(100, 160, 255, 0.25);
+  box-shadow: 0 0 20px rgba(80, 140, 255, 0.12);
+  animation: pulseOutline 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .constellation-glow {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ── Responsive: mobile (< 768px) ── */
+@media (max-width: 767px) {
+  .constellation-label {
+    font-size: clamp(9px, 2.5vw, 12px);
+  }
+}
